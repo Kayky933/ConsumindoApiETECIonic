@@ -28,10 +28,6 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/Tasks/put/put.module').then( m => m.PutPageModule)
   },
   {
-    path: 'delet-tasks',
-    loadChildren: () => import('./Pages/Tasks/delet/delet.module').then( m => m.DeletPageModule)
-  },
-  {
     path: 'home-tasks',
     loadChildren: () => import('./Pages/Tasks/home-tasks/home-tasks.module').then( m => m.HomeTasksPageModule)
   },

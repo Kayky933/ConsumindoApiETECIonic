@@ -1,36 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
   constructor(private http: HttpClient) {}
-  url = 'http://apitodotask.azurewebsites.net/api/tasktodo';
+  url = 'https://apitodotask.azurewebsites.net/api/tasktodo';
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
   GetOne(id: String) {
-    return this.http.get(this.url + id).toPromise();
+    return this.http.get(this.url + '/' + id).toPromise();
   }
   GetAll() {
     return this.http.get(this.url).toPromise();
   }
-  Post(nome: String) {
-    let data = {
-      id: '',
-      nome: nome,
-      active: true,
-    };
-    return this.http.post(this.url, data).toPromise();
+  Post(taskName: string) {
+    let taskObj = { nome: taskName };
+
+    return this.http.post(this.url,JSON.stringify(taskObj), this.httpOptions).toPromise();
   }
-  Put(nome: String) {
+  Put(name: String) {
     let data = {
-      id: '',
-      nome: nome,
-      active: true,
+      nome: name,
     };
     return this.http.put(this.url, data).toPromise();
   }
   Delet(id: String) {
-    return this.http.delete(this.url + id).toPromise();
+    return this.http.delete(this.url + '/' + id).toPromise();
   }
 }

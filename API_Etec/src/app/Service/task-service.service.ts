@@ -29,6 +29,6 @@ export class TaskService {
     return this.http.put(this.url, data).toPromise();
   }
   Delet(id: String) {
-    return this.http.delete(this.url + '/' + id).toPromise();
+    return this.http.delete(this.url + '/' + id ).toPromise();
   }
 }

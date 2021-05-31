@@ -10,23 +10,7 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
-  {
-    path: 'get-all-tasks',
-    loadChildren: () => import('./Pages/Tasks/get-all/get-all.module').then( m => m.GetAllPageModule)
-  },
-  {
-    path: 'get-one-tasks',
-    loadChildren: () => import('./Pages/Tasks/get-one/get-one.module').then( m => m.GetOnePageModule)
-  },
-  {
-    path: 'post-tasks',
-    loadChildren: () => import('./Pages/Tasks/post/post.module').then( m => m.PostPageModule)
-  },
-  {
-    path: 'put-tasks',
-    loadChildren: () => import('./Pages/Tasks/put/put.module').then( m => m.PutPageModule)
-  },
+  },  
   {
     path: 'home-tasks',
     loadChildren: () => import('./Pages/Tasks/home-tasks/home-tasks.module').then( m => m.HomeTasksPageModule)

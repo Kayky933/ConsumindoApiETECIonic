@@ -1,52 +1,32 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Tasks</ion-title>
+    <ion-title> TODO </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <h1>Bem-Vindo ao home de Tasks</h1>
-  <p>Oque gostaria de fazer?<br />Selecione uma das opções abaixo</p>
-  <ion-button
-    (click)="GoTo('get-one-tasks')"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Get One
-  </ion-button>
+<ion-content [fullscreen]="true">
+  <ion-list class="animated bounceInUp">
+    <ion-item *ngIf="tasks.length < 1">
+      <ion-label>Não há tarefas</ion-label>
+    </ion-item>
 
-  <ion-button
-    (click)="GoTo('get-all-tasks')"
-    expand="block"
-    fill="clear"
-    shape="round"
+    <ion-item-sliding (click)="openActions(task)" *ngFor="let task of tasks">    
+      <ion-item>
+        <ion-icon slot="start" name="radio-button-off" *ngIf="!task.done"></ion-icon>
+        <ion-icon slot="start"name="checkmark-circle"color="success"*ngIf="task.done"></ion-icon>
+        <ion-label *ngIf="!task.done">{{task.nome}}</ion-label>
+        <ion-label *ngIf="task.done"><del>{{task.nome}}</del></ion-label>
+        <ion-button color="danger" (click)="delet(task)">Excluir</ion-button>
+      </ion-item>
+      <hr size="4px" color="Black" />
+    </ion-item-sliding>
+  </ion-list>
+  <ion-button (click)="GetAllTasks()" expand="block" fill="clear" shape="round"
+    >Get All</ion-button
   >
-    Get All
-  </ion-button>
-
-  <ion-button
-    (click)="GoTo('post-tasks')"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Post
-  </ion-button>
-  <ion-button
-    (click)="GoTo('put-tasks')"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Put
-  </ion-button>
-  <ion-button
-    (click)="GoTo('delet-tasks')"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Delet
-  </ion-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="ShowAdd()" color="danger">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController, NavController, ToastController } from '@ionic/angular';
+import {
+  ActionSheetController,
+  AlertController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { TaskService } from 'src/app/Service/task-service.service';
 
 @Component({
@@ -8,12 +13,13 @@ import { TaskService } from 'src/app/Service/task-service.service';
   styleUrls: ['./home-tasks.page.scss'],
 })
 export class HomeTasksPage implements OnInit {
-
-  tasks: any = [{
-    id: '',
+  tasks: any = [
+    {
+      id: '',
       nome: '',
       active: true,
-  }];
+    },
+  ];
 
   constructor(
     public alertCtrl: AlertController,
@@ -23,6 +29,7 @@ export class HomeTasksPage implements OnInit {
     private service: TaskService
   ) {
     this.loadStorage();
+    this.GetAllTasks();
   }
 
   ngOnInit() {}
@@ -30,7 +37,7 @@ export class HomeTasksPage implements OnInit {
   GoToPage(page) {
     this.navCtrl.navigateForward(page);
   }
-  
+
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
@@ -101,6 +108,7 @@ export class HomeTasksPage implements OnInit {
   }
   async delet(task: any) {
     this.tasks = this.tasks.filter((taskArray) => taskArray != task);
+    this.service.Delet(task.id);
     this.updateLocalStorage();
   }
 
@@ -114,7 +122,7 @@ export class HomeTasksPage implements OnInit {
       .catch((erro) => {
         console.log(erro);
       });
-    }
+  }
   loadStorage() {
     let taskJson = localStorage.getItem('taskDb');
     console.log(taskJson);
@@ -156,6 +164,4 @@ export class HomeTasksPage implements OnInit {
     });
     await alert.present();
   }
- 
-
 }
